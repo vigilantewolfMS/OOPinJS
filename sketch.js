@@ -2,8 +2,10 @@ let bubbles = [];
 
 
 function setup() { // built-in P5.JS function -=- this runs once
-	createCanvas(600, 400); 
-	for (let i = 0; i < 6 ; i++)
+	createCanvas(900, 800); 
+	
+	
+	for (let i = 0; i < 9 ; i++)
 	{ 
 		let x = random(width);
 		let y = random (height);
@@ -19,6 +21,10 @@ function mousePressed(){
 
 function draw() { // built-in P5.JS function -=-  automatic loop that repeats forever
 	background(0); // give the canvas a black background
+	
+	textSize(32);
+	text("Time:", 20, 50);
+	
 	for (let i = 0; i < bubbles.length ; i++)
 	{
 		bubbles[i].move();
@@ -53,6 +59,9 @@ class Bubble{
 	strokeWeight(4); // line width
 	fill(this.brightness, 125);
 	ellipse(this.x, this.y, this.r, this.r ); // draw an ellipse/circle
+	
+	
+	
 }
 }
 
