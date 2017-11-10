@@ -1,9 +1,15 @@
 let bubbles = [];
 
+let fish1 ={
+	
+		x:200,
+		y:600,
+		r:0
+	
+}
 
 function setup() { // built-in P5.JS function -=- this runs once
 	createCanvas(900, 800); 
-	
 	
 	for (let i = 0; i < 9 ; i++)
 	{ 
@@ -20,10 +26,18 @@ function mousePressed(){
 }
 
 function draw() { // built-in P5.JS function -=-  automatic loop that repeats forever
-	background(0); // give the canvas a black background
+	background(0); // gifve the canvas a black background
 	
 	textSize(32);
 	text("Time:", 20, 50);
+	
+	displayfish();
+	checkInput();
+
+	
+	
+	
+	
 	
 	for (let i = 0; i < bubbles.length ; i++)
 	{
@@ -31,6 +45,24 @@ function draw() { // built-in P5.JS function -=-  automatic loop that repeats fo
 		bubbles[i].display();
 	}
 	
+}
+function checkInput(){
+	
+	if (keyIsDown(LEFT_ARROW))
+		fish1.x-=5;
+	if (keyIsDown(RIGHT_ARROW))
+		fish1.x+=5;
+	if (keyIsDown(UP_ARROW))
+		fish1.y-=3;
+	if (keyIsDown(DOWN_ARROW))
+		fish1.y+=3;
+	
+	if(fish1.x>width)
+	{
+		fish1.x=width;
+	}else if (fish1.x<0){
+		fish1.x=0
+	}
 }
 
 class Bubble{
@@ -59,11 +91,28 @@ class Bubble{
 	strokeWeight(4); // line width
 	fill(this.brightness, 125);
 	ellipse(this.x, this.y, this.r, this.r ); // draw an ellipse/circle
+	}
 	
 	
 	
 }
-}
+
+
+	
+
+	function displayfish(){
+		stroke(255);
+		strokeWeight(1);
+		fill(204,101,192,127)
+		 // An ellipse
+		ellipse(fish1.x, fish1.y, 50, 30);
+		// A triangle
+		triangle(200, 130, 220, 115, 200, 100);
+	}
+	
+
+
+
 
 
 
