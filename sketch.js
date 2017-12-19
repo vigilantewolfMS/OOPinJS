@@ -1,67 +1,59 @@
 let bubbles = [];
-
-let fish1 ={
-	
-		x:200,
-		y:600,
-		r:0
-	
-}
+let bubblenum = 6;
+let timer = 150;
+let score = 0;
 
 function setup() { // built-in P5.JS function -=- this runs once
 	createCanvas(900, 800); 
+	drawbubbles();
+
 	
-	for (let i = 0; i < 9 ; i++)
-	{ 
-		let x = random(width);
-		let y = random (height);
-		let r = random (50,100);
-	bubbles[i] = new Bubble (x, y, r);
-}
 }
 
 function mousePressed(){
 	for (let i=0 ;  i < bubbles.length ; i++)
 		bubbles[i].clicked(mouseX, mouseY);
+		score++;
 }
 
+function drawbubbles(){
+	
+	bubblenum = random(7,20);
+		for (let i = 0; i < bubblenum ; i++){ 
+		let x = random(width);
+		let y = random (height);
+		let r = random (50,100);
+		bubbles[i] = new Bubble (x, y, r);
+	}
+}
+
+function timerdecrease(){
+	timer--;
+}
 function draw() { // built-in P5.JS function -=-  automatic loop that repeats forever
 	background(0); // gifve the canvas a black background
 	
 	textSize(32);
 	text("Time:", 20, 50);
-	
-	displayfish();
-	checkInput();
+	text(timer, 100,50);
+	text("Score:",20,100);
+	text(score,120,100)
+	timerdecrease();
 
-	
-	
-	
-	
-	
 	for (let i = 0; i < bubbles.length ; i++)
 	{
 		bubbles[i].move();
 		bubbles[i].display();
 	}
 	
-}
-function checkInput(){
-	
-	if (keyIsDown(LEFT_ARROW))
-		fish1.x-=5;
-	if (keyIsDown(RIGHT_ARROW))
-		fish1.x+=5;
-	if (keyIsDown(UP_ARROW))
-		fish1.y-=3;
-	if (keyIsDown(DOWN_ARROW))
-		fish1.y+=3;
-	
-	if(fish1.x>width)
+	if(timer < 0){
+		background(0);
+		text("You lose", 300,400);
+	}
+	if(score == 9)
 	{
-		fish1.x=width;
-	}else if (fish1.x<0){
-		fish1.x=0
+		background(0);
+		text("You win!",300,400);
 	}
 }
 
@@ -108,6 +100,7 @@ class Bubble{
 		ellipse(fish1.x, fish1.y, 50, 30);
 		// A triangle
 		triangle(200, 130, 220, 115, 200, 100);
+		
 	}
 	
 
